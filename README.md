@@ -82,10 +82,11 @@ Pedidos entregues com atraso têm nota média de **2,57**, contra **4,29** nos e
 | Atrasado | 7.700 | 2,57 |
 | No prazo | 88.653 | 4,29 |
 
+![Nota média: atrasado × no prazo](docs/resultados/nota_atraso_vs_prazo.png)
+
 Entre as categorias com menor nota (mínimo de 100 avaliações), `office_furniture` tem a pior média (3,64). Ela atrasa um pouco acima da média geral (9,05%), mas, mesmo nos pedidos entregues no prazo, sua nota (3,75) é a menor entre as 15 categorias da tabela. Ou seja, o atraso, sozinho, não explica a avaliação dessa categoria.
 
 ![Categoria × atraso](docs/resultados/categoria_vs_atraso.png)
-![Nota média: atrasado × no prazo](docs/resultados/nota_atraso_vs_prazo.png)
 
 ### 7. Como a entrega varia entre os estados?
 *(`sql/03_joins_subqueries_ctes.sql`)*
