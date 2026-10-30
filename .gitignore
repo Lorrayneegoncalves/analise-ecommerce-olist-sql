@@ -1,0 +1,6 @@
+# Dados brutos e backups: não versionar
+*.csv
+*.bak
+*.mdf
+*.ldf
+*.zip
