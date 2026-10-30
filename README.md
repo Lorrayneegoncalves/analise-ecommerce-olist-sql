@@ -4,7 +4,7 @@ Projeto de análise de dados com **T-SQL (SQL Server)** sobre vendas de e-commer
 
 ## Dados
 
-- **Fonte:** *Brazilian E-Commerce Public Dataset by Olist*, disponível no Kaggle.
+- **Fonte:** *Brazilian E-Commerce Public Dataset by Olist*, (https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce), disponível no Kaggle.
 - **Conteúdo:** cerca de 99 mil pedidos feitos entre setembro de 2016 e outubro de 2018 em marketplaces brasileiros, com clientes, itens, pagamentos, avaliações, produtos e vendedores. Os dados são anonimizados.
 - Os CSVs **não estão** neste repositório. Para reproduzir, baixe-os na página do dataset.
 - A tabela `geolocation` (mais de 1 milhão de linhas) não foi usada: as perguntas deste projeto precisam apenas de estado e cidade, que já estão em `customers` e `sellers`.
