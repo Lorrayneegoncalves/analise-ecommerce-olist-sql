@@ -4,3 +4,8 @@
 *.mdf
 *.ldf
 *.zip
+
+# Ambiente local
+.venv/
+__pycache__/
+.claude/

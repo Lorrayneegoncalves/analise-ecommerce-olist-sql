@@ -2,16 +2,49 @@
 
 Projeto de análise de dados com **T-SQL (SQL Server)** sobre vendas de e-commerce no Brasil. A partir de arquivos CSV, montei o banco, defini as relações entre as tabelas e respondi perguntas de negócio sobre receita, pagamentos, entrega, recompra e satisfação dos clientes.
 
+## Dashboard
+
+As mesmas perguntas respondidas em SQL também estão em um dashboard interativo, feito em **Python (Streamlit + Plotly)**, com filtros de ano, estado do cliente e categoria do produto. Ele usa as mesmas definições das consultas (receita sem frete e só de pedidos entregues; atraso = entrega depois da data estimada), e os totais batem com os resultados do SQL.
+
+| Aba | O que mostra |
+|---|---|
+| **Visão geral** | Receita, pedidos entregues, ticket médio e nota média; receita por mês; categorias com maior receita |
+| **Entrega** | Prazo médio e percentual de atrasos; atrasos por mês; nota média no prazo e com atraso; prazo e atraso por estado |
+| **Clientes e categorias** | Clientes e taxa de recompra; receita por estado; categorias com menor nota média |
+
+![Dashboard: visão geral](docs/dashboard/visao_geral.png)
+
+![Dashboard: entrega](docs/dashboard/entrega.png)
+
+![Dashboard: clientes e categorias](docs/dashboard/clientes_categorias.png)
+
+Para rodar (Python 3.10 ou superior):
+
+```bash
+python -m venv .venv
+.venv\Scripts\activate            # Windows (Mac/Linux: source .venv/bin/activate)
+pip install -r requirements.txt
+streamlit run dashboard/app.py
+```
+
+O dashboard lê três arquivos pequenos da pasta `dashboard/dados/`, já incluídos no repositório. Eles são gerados a partir dos CSVs originais por `dashboard/preparar_dados.py` e têm só as colunas usadas (sem textos de avaliação e com os identificadores trocados por números). Para gerar de novo:
+
+```bash
+python dashboard/preparar_dados.py --entrada caminho/para/os/csvs
+```
+
+O script mostra os totais de conferência (99.441 pedidos, 96.478 entregues e R$ 13.591.643,70 na soma dos preços), os mesmos da importação no SQL Server.
+
 ## Dados
 
 - **Fonte:** *Brazilian E-Commerce Public Dataset by Olist*, (https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce), disponível no Kaggle.
 - **Conteúdo:** cerca de 99 mil pedidos feitos entre setembro de 2016 e outubro de 2018 em marketplaces brasileiros, com clientes, itens, pagamentos, avaliações, produtos e vendedores. Os dados são anonimizados.
-- Os CSVs **não estão** neste repositório. Para reproduzir, baixe-os na página do dataset.
+- Os CSVs **não estão** neste repositório. Para reproduzir, baixe-os na página do dataset. A pasta `dashboard/dados/` tem apenas um recorte derivado deles, usado pelo dashboard.
 - A tabela `geolocation` (mais de 1 milhão de linhas) não foi usada: as perguntas deste projeto precisam apenas de estado e cidade, que já estão em `customers` e `sellers`.
 
 ## Ferramentas
 
-SQL Server (T-SQL), SQL Server Management Studio (SSMS) e Power BI Desktop, usado apenas para o gráfico de receita mensal.
+SQL Server (T-SQL) e SQL Server Management Studio (SSMS) na análise; Power BI Desktop, usado apenas para o gráfico de receita mensal; Python (pandas, Streamlit e Plotly) no dashboard.
 
 ## Modelo de dados
 
@@ -131,13 +164,19 @@ sql/
   03_joins_subqueries_ctes.sql
   04_funcoes_de_janela.sql
   05_categoria_vs_atraso.sql
+dashboard/
+  app.py                # dashboard (Streamlit + Plotly)
+  preparar_dados.py     # gera os arquivos de dashboard/dados a partir dos CSVs
+  dados/                # recorte dos dados usado pelo dashboard
 docs/
   diagrama_er.png
+  dashboard/            # prints do dashboard
   resultados/
     receita_mensal.png
     receita_mensal_tabela.png
     categoria_vs_atraso.png
     entrega_por_estado.png
+requirements.txt
 ```
 
 ## O que aprendi
